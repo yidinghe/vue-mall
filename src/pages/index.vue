@@ -1,57 +1,95 @@
 <template>
-  <div class="service">
+  <div class="index">
     <div class="container">
-      <ul>
-        <li>
-          <span class="icon-setting"></span>预约维修服务
-        </li>
-        <li>
-          <span class="icon-7day"></span>7天无理由退货
-        </li>
-        <li>
-          <span class="icon-15day"></span>15天免费换货
-        </li>
-        <li>
-          <span class="icon-post"></span>满150元包邮
-        </li>
-      </ul>
+      <div class="swiper-box">
+        <swiper v-bind:options="swiperOption">
+          <swiper-slide v-for="(item, index) in slideList" :key="index">
+            <a v-bind:href="'/#/product/' + item.id">
+              <img v-bind:src="item.img" />
+            </a>
+          </swiper-slide>
+          <!-- Optional controls -->
+          <div class="swiper-pagination" slot="pagination"></div>
+          <div class="swiper-button-prev" slot="button-prev"></div>
+          <div class="swiper-button-next" slot="button-next"></div>
+        </swiper>
+      </div>
+      <div class="ads-box"></div>
+      <div class="banner"></div>
+      <div class="product-box"></div>
     </div>
+    <service-bar></service-bar>
   </div>
 </template>
+
 <script>
+import ServiceBar from "./../components/ServiceBar";
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+
+import "swiper/css/swiper.css";
+
 export default {
-  name: "service-bar"
+  name: "index",
+  components: {
+    ServiceBar,
+    Swiper,
+    SwiperSlide
+  },
+  data() {
+    return {
+      swiperOption: {
+        autoplay: true,
+        loop: true,
+        effect: "cube",
+        cubeEffect: {
+          shadowOffset: 100,
+          shadowScale: 0.6
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        }
+      },
+      slideList: [
+        {
+          id: "42",
+          img: "/imgs/slider/slide-1.jpg"
+        },
+        {
+          id: "45",
+          img: "/imgs/slider/slide-2.jpg"
+        },
+        {
+          id: "46",
+          img: "/imgs/slider/slide-3.jpg"
+        },
+        {
+          id: "",
+          img: "/imgs/slider/slide-4.jpg"
+        },
+        {
+          id: "",
+          img: "/imgs/slider/slide-1.jpg"
+        }
+      ]
+    };
+  }
 };
 </script>
+
 <style lang="scss">
-@import "./../assets/scss/mixin.scss";
-.service {
-  padding: 33px 0;
-  color: #666666;
-  font-size: 16px;
-  li {
-    display: inline-block;
-    width: 24.9%;
-    text-align: center;
-    border-right: 1px solid #e5e5e5;
-    span {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      vertical-align: middle;
-      margin-right: 8px;
-    }
-    .icon-setting {
-      @include bgImg(20px, 20px, "/imgs/icon-setting.png");
-    }
-    .icon-7day {
-      @include bgImg(20px, 20px, "/imgs/icon-7day.png");
-    }
-    .icon-15day {
-      @include bgImg(20px, 20px, "/imgs/icon-15day.png");
-    }
-    .icon-post {
-      @include bgImg(20px, 20px, "/imgs/icon-post.png");
+.index {
+  .swiper-box {
+    .swiper-container {
+      height: 451px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }
