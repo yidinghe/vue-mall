@@ -244,6 +244,7 @@ export default {
             top: 112px;
             left: 0;
             width: 1226px;
+            background-color: #ffffff;
             height: 0;
             opacity: 0;
             overflow: hidden;
