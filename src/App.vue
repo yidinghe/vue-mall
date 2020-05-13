@@ -1,34 +1,42 @@
 <template>
-    <div id="app">
-        <router-view/>
-    </div>
+  <div id="app">
+    <router-view />
+  </div>
 </template>
 
 <script>
-import storage from './storage'
+
 export default {
-  name: 'app',
-  components: {
-    
-  },
-  data(){
+  name: "app",
+  components: {},
+  data() {
     return {
-      a:''
+      a: ""
+    };
+  },
+  mounted() {
+    if (this.$cookie.get("userId")) {
+      this.getUser();
+      this.getCartCount();
     }
   },
-  mounted(){
-    // storage.setItem('a',1);
-    // storage.setItem('b',{a:1});
-    // storage.setItem('c',10,'b');
-    // this.a = storage.getItem('b');
-    // storage.clear('a');
-    storage.clear('a','b');
+  methods: {
+    getUser() {
+      this.axios.get("/user").then((res = {}) => {
+        this.$store.dispatch("saveUserName", res.username);
+      });
+    },
+    getCartCount() {
+      this.axios.get("/carts/products/sum").then((res = 0) => {
+        this.$store.dispatch("saveCartCount", res);
+      });
+    }
   }
-}
+};
 </script>
 
 <style lang='scss'>
-@import './assets/scss/reset.scss';
-@import './assets/scss/config.scss';
-@import './assets/scss/button.scss';
+@import "./assets/scss/reset.scss";
+@import "./assets/scss/config.scss";
+@import "./assets/scss/button.scss";
 </style>
