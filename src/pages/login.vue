@@ -62,15 +62,6 @@ export default {
   },
   methods: {
     login() {
-
-        // this.$cookie.set("userId", 8, { expires: "Session" });
-        // this.saveUserName('jack');
-        // this.$router.push({
-        //     name: "index",
-        //     params: {
-        //       from: "login"
-        //     }
-        //   });
       let { username, password } = this;
       this.axios
         .post("/user/login", {
@@ -79,7 +70,7 @@ export default {
         })
         .then(res => {
           this.$cookie.set("userId", res.id, { expires: "Session" });
-          // this.$store.dispatch('saveUserName',res.username);
+          this.$store.dispatch('saveUserName',res.username);
           this.saveUserName(res.username);
           this.$router.push({
             name: "index",

@@ -122,9 +122,13 @@ export default {
   name: "nav-header",
   data() {
     return {
-      username: "",
       phoneList: []
     };
+  },
+  computed: {
+    username() {
+      return this.$store.state.username;
+    }
   },
   mounted() {
     this.getProductList();
