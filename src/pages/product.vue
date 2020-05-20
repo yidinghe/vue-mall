@@ -1,6 +1,10 @@
 <template>
-  <div>
-    <product-param></product-param>
+  <div class="product">
+    <product-param>
+      <template v-slot:buy>
+        <button class="btn">立即购买</button>
+      </template>
+    </product-param>
   </div>
 </template>
 
@@ -13,3 +17,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.product {
+  button {
+    margin-left: 11px;
+  }
+}
+</style>
