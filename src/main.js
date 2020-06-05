@@ -41,6 +41,7 @@ Vue.use(VueCookie)
 Vue.use(VueLazyload, {
   loading: '/imgs/loading-svg/loading-bars.svg'
 })
+Vue.prototype.$message = Message;
 Vue.config.productionTip = false
 
 new Vue({
