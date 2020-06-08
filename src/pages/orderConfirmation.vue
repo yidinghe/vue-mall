@@ -53,7 +53,7 @@
                 :class="{'checked':index == checkIndex}"
                 @click="checkIndex=index"
                 v-for="(item,index) in list"
-                :key="index"
+                v-bind:key = {index}
               >
                 <h2>{{item.receiverName}}</h2>
                 <div class="phone">{{item.receiverMobile}}</div>
@@ -481,6 +481,7 @@ export default {
       .btn-group {
         margin-top: 37px;
         text-align: right;
+        margin-right: 15px;
       }
     }
   }
