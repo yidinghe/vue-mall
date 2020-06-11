@@ -25,7 +25,7 @@ axios.interceptors.response.use(function (response) {
   if (res.status == 0) {
     return res.data
   } else if (res.status == 10) {
-    let path = location.hash;
+    let path = location.hash
     if (path != '#/index') {
       window.location.href = '/#/login'
     }
@@ -34,6 +34,10 @@ axios.interceptors.response.use(function (response) {
     Message.warning(res.msg)
     return Promise.reject(res)
   }
+}, (error) => {
+  let res = error.response
+  Message.error(res.data.message)
+  return Promise.reject(error)
 })
 
 Vue.use(VueAxios, axios)
@@ -41,7 +45,7 @@ Vue.use(VueCookie)
 Vue.use(VueLazyload, {
   loading: '/imgs/loading-svg/loading-bars.svg'
 })
-Vue.prototype.$message = Message;
+Vue.prototype.$message = Message
 Vue.config.productionTip = false
 
 new Vue({

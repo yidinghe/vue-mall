@@ -1,5 +1,10 @@
 <template>
   <div class="order-confirm">
+    <order-header title="订单确认">
+      <template v-slot:tip>
+        <span>请认真填写收货地址</span>
+      </template>
+    </order-header>
     <svg
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +58,7 @@
                 :class="{'checked':index == checkIndex}"
                 @click="checkIndex=index"
                 v-for="(item,index) in list"
-                v-bind:key = {index}
+                v-bind:key="{index}"
               >
                 <h2>{{item.receiverName}}</h2>
                 <div class="phone">{{item.receiverMobile}}</div>
@@ -82,7 +87,7 @@
           <div class="item-good">
             <h2>商品</h2>
             <ul>
-              <li v-for="(item,index) in cartList" v-bind:key = {index}>
+              <li v-for="(item,index) in cartList" v-bind:key="{index}">
                 <div class="good-name">
                   <img v-lazy="item.productMainImage" alt />
                   <span>{{item.productName + ' ' + item.productSubtitle}}</span>
@@ -186,6 +191,7 @@
   </div>
 </template>
 <script>
+import OrderHeader from "./../components/OrderHeader";
 import Modal from "./../components/Modal";
 export default {
   name: "order-confirm",
@@ -203,7 +209,8 @@ export default {
     };
   },
   components: {
-    Modal
+    Modal,
+    OrderHeader
   },
   mounted() {
     this.getAddressList();
